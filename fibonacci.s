@@ -1,6 +1,5 @@
 // Fibonacci em assembly A64
-// O programa a seguir converte frases (escolhidas pelo usuário) para a sequência fibonacci
-// Cada palavra da frase é convertida no próximo número da sequência
+// O programa a seguir imprime a sequência fibonacci do tamanho escolhido pelo usuário no terminal
 
 .global _start // Inicialização
 
@@ -19,7 +18,7 @@
 	jump: .ascii "\n"// Texto 'pular linha'
 	jlen = . - jump // Comprimento do texto
 
-	err: .ascii "Erro: Parâmetro não encontrado. Digite o tamanho da sequência desejada no commando: ex. './fibonacci 6'" // Texto mensagem 3
+	err: .ascii "Erro: Parâmetro inválido! Digite o comando './fibonacci' seguido do tamanho da sequência desejada: ex. './fibonacci 6'" // Texto mensagem 3
 	elen = . - err // Comprimento do texto
 
 .section .text // Sessão de texto
@@ -29,17 +28,28 @@ _start:
 
 	// Validação do comando
 	cmp x0, 2    // Compara x0 com o número 2 para verificar se ao menos um argumento foi passado para o comando ./fibonacci
-	bge _main    // Pula para main em caso positivo
+	beq _loadPre // Pula para a função de carregamento dos argumentos em caso positivo (_loadPre)
 
 	b _error     // pula para a finalização do programa com menssagem de erro (caso o comando não tenha nenhum argumento)
 
-_main:
-	// Função principal
-	// Subitrai 1 de x0 para armazenar o valor correto de argumentos (palavras da frase) da função e armazena em x0
-	sub x0, x0, 1
+_loadPre:
+        // Função para carregar os argumentos do comando
+        mov x0, 0             // Move o valor 0 para x0
+        mov w2, 0             // Move o valor 0 para w2
+        mov w4, 10            // Move o valor 10 para w4 que multiplicará os dígitos recebidos para a conversão da string em inteiro
+        ldr x1, [sp, 16]      // Carrega o valor presente no stack pointer para x1
+_loadNum:
+        ldrb w3, [x1, x0]     // Carrega o byte respectiv (x0) de x1 para w3
+        cmp w3, 0             // Verifica se está no final da string
+        beq _main             // Em caso positivo vai para a função _main
+        sub w3, w3, 48        // Subtrai 48 do valor de w3 para convertem em inteiro
+        madd w2, w2, w4, w3   // Multiplica o valor de w2 por 10 e soma com o valor em w3
+        add x0, x0, 1         // Adiciona 1 a x0
+        b _loadNum            // Retorna ao início da função _loadNum
 
+_main:
 	// Inicialização dos registradores
-    	mov x7, x0     // Tamanho da sequência
+    	uxtw x7, w2    // Tamanho da sequência
 	mov x6, xzr    // Contador inicializado em 0
     	mov x3, 1      // Primeiro número fibonacci
     	mov x4, 1      // Segundo número fibonacci
@@ -59,8 +69,8 @@ _main:
 
 _fib:
     	// Imprime o número da vez
-	mov x0, x3
-	bl _printUInt
+	mov x0, x3     // Move x3 para x0 (x3 contém o próximo número da sequência)
+	bl _printUInt  // Pula para a função _printUInt
 
 	ldr x1, =space // Espaço entre números
         ldr x2, =slen  // Comprimento do espaço
