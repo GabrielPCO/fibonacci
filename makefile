@@ -1,12 +1,12 @@
-all: fibonacci fibonacci.o
+all: fibonacci
 	@echo "Instalação concluída com sucesso!"
 
-fibonacci.o: fibonacci
+fibonacci: fibonacci.o
 	@echo "- Compilando binários"
 	ld fibonacci.o -o fibonacci
 	@echo "Finalizando a instalação..."
 
-fibonacci:
+fibonacci.o: fibonacci.s
 	@echo "Instalando app Fibonacci..."
 	@echo "- Criando arquivo objeto"
 	as fibonacci.s -o fibonacci.o
