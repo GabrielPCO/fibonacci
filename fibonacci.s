@@ -6,7 +6,7 @@
 .section .data // Sessão de dados (declarando variáveis)
     	num: .byte 0 // Declaração de variável numérica
 
-	msg: .ascii "Sequencia Fibonacci (" // Texto mensagem 1
+	msg: .ascii "Sequência Fibonacci (" // Texto mensagem 1
 	mlen = . - msg // Comprimento do texto
 
 	msg2: .ascii " dígitos): " // Texto mensagem 2
