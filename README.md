@@ -26,7 +26,7 @@
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ## Aplicação
-O programa a seguir converte frases (escolhidas pelo usuário) para a sequência fibonacci. Cada palavra da frase é convertida no próximo número da sequência.
+O programa a seguir imprime a sequência fibonacci do tamanho escolhido pelo usuário no terminal
 
 Essa é uma aplicação de linha de comando e foi programada em assembly armv8 a64, sendo indicada para rodar em raspberry pi 4 e 5.
 
@@ -62,16 +62,16 @@ make clean
 
 ```
 
-- 5: Execute a aplicação (./fibonacci) colocando uma frase qualquer como argumento
+- 5: Execute a aplicação (./fibonacci) colocando um número qualquer como argumento
 ```
 
-./fibonacci Sequência de Fibonacci é a sequência numérica proposta pelo matemático Leonardo Pisa
+./fibonacci 12
 
 ```
 
 Resposta:
 ```
 
-Sequencia Fibonacci (12 dígitos): 1 1 2 3 5 8 13 21 34 55 89 144
+Sequência Fibonacci (12 dígitos): 1 1 2 3 5 8 13 21 34 55 89 144
 
 ```
