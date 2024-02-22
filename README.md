@@ -1,6 +1,6 @@
 <h1 align="center">Fibonacci</h1>
 
-<h3 align="center"> Aplicação desenvolvida em assembly armv8 A64 </h3>
+<h3 align="center"> Aplicação desenvolvida em assembly ARM64 </h3>
 
 </p>
 <p align="center">
@@ -28,10 +28,10 @@
 ## Aplicação
 O programa a seguir imprime a sequência fibonacci do tamanho escolhido pelo usuário no terminal
 
-Essa é uma aplicação de linha de comando e foi programada em assembly armv8 a64, sendo indicada para rodar em raspberry pi 4 e 5.
+Essa é uma aplicação de CLI que foi programada em assembly ARM64 (aarch64), sendo indicada para rodar em sistemas ARM de arquitetura 64-bit.
 
 ## Requisitos
-- Raspberry pi 4 ou 5 (64-bit)
+- Sistemas ARM 64-bit (aarch64) (Testado em Raspberry pi 4 64-bit)
 
 ## Instalação
 - 1: Clone o respositório para a sua máquina com o comando git clone
